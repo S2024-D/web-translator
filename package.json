@@ -5,6 +5,7 @@
   "main": "api/translate.js",
   "scripts": {
     "start": "node server.js",
+    "digest": "node scripts/hn-digest.js",
     "dev": "vercel dev",
     "deploy": "vercel --prod"
   },

@@ -1,0 +1,30 @@
+name: HN Daily Digest
+
+on:
+  # 매일 아침 9시 (한국 시간) = UTC 0시
+  schedule:
+    - cron: '0 0 * * *'
+
+  # 수동 실행 가능
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run HN Digest
+        env:
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+        run: node scripts/hn-digest.js
