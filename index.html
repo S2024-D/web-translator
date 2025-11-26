@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Translator - 웹페이지 번역기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Web Translator</h1>
+            <p class="subtitle">URL을 입력하면 웹페이지를 번역합니다</p>
+        </header>
+
+        <!-- API 키 설정 섹션 -->
+        <section id="api-key-section" class="card">
+            <h2>DeepL API 키 설정</h2>
+            <div class="input-group">
+                <input type="password" id="api-key-input" placeholder="DeepL API 키 입력">
+                <button id="save-key-btn">저장</button>
+            </div>
+            <p class="status" id="key-status"></p>
+        </section>
+
+        <!-- 번역 섹션 -->
+        <section id="translate-section" class="card hidden">
+            <h2>웹페이지 번역</h2>
+            <div class="input-group">
+                <input type="url" id="url-input" placeholder="https://example.com">
+                <select id="target-lang">
+                    <option value="KO">한국어</option>
+                    <option value="EN">English</option>
+                    <option value="JA">日本語</option>
+                    <option value="ZH">中文</option>
+                    <option value="DE">Deutsch</option>
+                    <option value="FR">Français</option>
+                    <option value="ES">Español</option>
+                </select>
+                <button id="translate-btn">번역</button>
+            </div>
+            <div class="settings-link">
+                <a href="#" id="change-key-link">API 키 변경</a>
+            </div>
+        </section>
+
+        <!-- 로딩 -->
+        <section id="loading-section" class="card hidden">
+            <div class="loader"></div>
+            <p>번역 중입니다...</p>
+        </section>
+
+        <!-- 결과 섹션 -->
+        <section id="result-section" class="card hidden">
+            <div class="result-header">
+                <h2>번역 결과</h2>
+                <div class="toggle-group">
+                    <button id="show-translated" class="active">번역문</button>
+                    <button id="show-original">원문</button>
+                </div>
+            </div>
+            <div id="result-content" class="result-content"></div>
+            <button id="new-translate-btn" class="secondary-btn">새 번역</button>
+        </section>
+
+        <!-- 에러 섹션 -->
+        <section id="error-section" class="card hidden">
+            <h2>오류 발생</h2>
+            <p id="error-message"></p>
+            <button id="retry-btn" class="secondary-btn">다시 시도</button>
+        </section>
+
+        <!-- 사용 안내 -->
+        <section class="card info-card">
+            <h2>사용 안내</h2>
+
+            <div class="info-block">
+                <h3>DeepL API 키 발급 방법 (무료)</h3>
+                <ol>
+                    <li><a href="https://www.deepl.com/pro-api" target="_blank">DeepL API 페이지</a>에 접속</li>
+                    <li><strong>"무료로 가입하기"</strong> 클릭</li>
+                    <li>이메일, 비밀번호 입력 후 계정 생성</li>
+                    <li>신용카드 등록 (무료 플랜은 과금되지 않음)</li>
+                    <li>계정 페이지에서 <strong>API 키</strong> 복사</li>
+                    <li>이 페이지에 붙여넣기</li>
+                </ol>
+                <p class="note">무료 플랜: 월 50만자 (약 100~200 페이지 분량)</p>
+            </div>
+
+            <div class="info-block">
+                <h3>API 키 저장 안내</h3>
+                <ul>
+                    <li>API 키는 <strong>브라우저에만 저장</strong>됩니다 (localStorage)</li>
+                    <li>서버로 전송되지 않아 안전합니다</li>
+                    <li>같은 브라우저에서는 <strong>한 번만 입력</strong>하면 됩니다</li>
+                    <li>다른 기기/브라우저에서는 다시 입력이 필요합니다</li>
+                    <li>언제든 "API 키 변경"으로 수정/삭제 가능</li>
+                </ul>
+            </div>
+
+            <div class="info-block">
+                <h3>사용 방법</h3>
+                <ol>
+                    <li>DeepL API 키 입력 및 저장</li>
+                    <li>번역할 웹페이지 URL 입력</li>
+                    <li>원하는 번역 언어 선택</li>
+                    <li>"번역" 버튼 클릭</li>
+                    <li>원문/번역문 토글로 비교</li>
+                </ol>
+            </div>
+
+            <div class="info-block">
+                <h3>지원 언어</h3>
+                <p>한국어, 영어, 일본어, 중국어, 독일어, 프랑스어, 스페인어</p>
+            </div>
+
+            <div class="info-block">
+                <h3>제한 사항</h3>
+                <ul>
+                    <li>로그인이 필요한 페이지는 번역 불가</li>
+                    <li>JavaScript로만 렌더링되는 페이지는 일부 내용 누락 가능</li>
+                    <li>매우 긴 페이지는 시간이 걸릴 수 있음</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p>Powered by <a href="https://www.deepl.com" target="_blank">DeepL</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
