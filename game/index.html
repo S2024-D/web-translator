@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Flight - 세계 일주 비행 게임</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 시작 화면 -->
+    <div id="start-screen" class="screen">
+        <h1>World Flight</h1>
+        <p class="subtitle">세계 일주 비행 게임</p>
+
+        <div class="airport-select">
+            <h2>출발 공항 선택</h2>
+            <div class="airport-grid">
+                <button class="airport-btn" data-airport="ICN">
+                    <span class="continent">아시아</span>
+                    <span class="airport">인천 ICN</span>
+                    <span class="country">대한민국</span>
+                </button>
+                <button class="airport-btn" data-airport="LHR">
+                    <span class="continent">유럽</span>
+                    <span class="airport">히드로 LHR</span>
+                    <span class="country">영국</span>
+                </button>
+                <button class="airport-btn" data-airport="JFK">
+                    <span class="continent">북미</span>
+                    <span class="airport">JFK</span>
+                    <span class="country">미국</span>
+                </button>
+                <button class="airport-btn" data-airport="GRU">
+                    <span class="continent">남미</span>
+                    <span class="airport">과룰류스 GRU</span>
+                    <span class="country">브라질</span>
+                </button>
+                <button class="airport-btn" data-airport="CPT">
+                    <span class="continent">아프리카</span>
+                    <span class="airport">케이프타운 CPT</span>
+                    <span class="country">남아공</span>
+                </button>
+                <button class="airport-btn" data-airport="SYD">
+                    <span class="continent">오세아니아</span>
+                    <span class="airport">시드니 SYD</span>
+                    <span class="country">호주</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>조작법</h3>
+            <ul>
+                <li><kbd>W</kbd> / <kbd>↑</kbd> : 가속 (이륙 시 필수)</li>
+                <li><kbd>S</kbd> / <kbd>↓</kbd> : 감속</li>
+                <li><kbd>A</kbd> / <kbd>←</kbd> : 좌회전</li>
+                <li><kbd>D</kbd> / <kbd>→</kbd> : 우회전</li>
+                <li><kbd>Space</kbd> : 고도 상승</li>
+                <li><kbd>Shift</kbd> : 고도 하강</li>
+            </ul>
+            <p class="tip">활주로에서 속도 200km/h 이상이면 이륙 가능!</p>
+        </div>
+    </div>
+
+    <!-- 게임 화면 -->
+    <div id="game-screen" class="screen hidden">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- HUD -->
+        <div id="hud">
+            <div class="hud-item">
+                <span class="label">속도</span>
+                <span id="speed">0</span>
+                <span class="unit">km/h</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">고도</span>
+                <span id="altitude">0</span>
+                <span class="unit">m</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">방향</span>
+                <span id="heading">N</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">상태</span>
+                <span id="status">활주로</span>
+            </div>
+        </div>
+
+        <!-- 미니맵 -->
+        <div id="minimap">
+            <canvas id="minimapCanvas"></canvas>
+        </div>
+
+        <!-- 이륙 안내 -->
+        <div id="takeoff-guide" class="guide">
+            <p>W키로 가속하여 <strong>200km/h</strong> 도달 후 <strong>Space</strong>로 이륙!</p>
+        </div>
+
+        <!-- 목적지 정보 -->
+        <div id="destination-info" class="hidden">
+            <span id="dest-name">-</span>
+            <span id="dest-distance">- km</span>
+        </div>
+    </div>
+
+    <!-- 착륙 화면 -->
+    <div id="landing-screen" class="screen hidden">
+        <h2>착륙 성공!</h2>
+        <p id="landing-airport"></p>
+        <p id="flight-stats"></p>
+        <button id="continue-btn">계속 비행</button>
+        <button id="restart-btn">다시 시작</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
